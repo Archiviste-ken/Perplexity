@@ -1,0 +1,12 @@
+import "dotenv/config";
+import app from "./src/app";
+import connectDB from "./src/config/db";
+
+connectDB().catch((err) => {
+  console.error("The mongoDB connection failed: ", err);
+  process.exit(1);
+});
+
+app.listen(3000, () => {
+  console.log("server is now running on the port 3000");
+});
