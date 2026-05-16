@@ -1,6 +1,6 @@
 import "dotenv/config";
-import app from "./src/app";
-import connectDB from "./src/config/db";
+import app from "./src/app.js";
+import connectDB from "./src/config/db.js";
 
 connectDB().catch((err) => {
   console.error("The mongoDB connection failed: ", err);
