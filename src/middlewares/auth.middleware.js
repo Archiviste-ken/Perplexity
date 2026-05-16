@@ -1,4 +1,4 @@
-import jwt from "jsonwebtoken";
+import jwt from "jsonwebtoken";      
 
 export async function identifyUser(req, res, next) {
   const token = req.cookies.token;
