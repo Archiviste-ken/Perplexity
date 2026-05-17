@@ -42,6 +42,16 @@ export async function registerUser(req, res) {
     email,
     password,
   });
+
+  res.status(201).json({
+    message: "User registered Successfully",
+    success: true,
+    user: {
+      id: user._id,
+      user: user.username,
+      email: user.email,
+    },
+  });
 }
 
 export async function verifyEmail(req, res) {
