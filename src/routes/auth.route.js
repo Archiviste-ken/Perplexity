@@ -2,7 +2,7 @@ import Router from "express";
 
 const authRouter = Router();
 
-authRouter.post("/register",)
+authRouter.post("/register", registerUser)
 
 authRouter.post("/login",)
 
