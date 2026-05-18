@@ -9,7 +9,7 @@ const authRouter = Router();
 
 authRouter.post("/register", registerValidator, registerUser);
 
-authRouter.post("/verifyEmail", verifyEmail);
+authRouter.get("/verifyEmail", verifyEmail);
 
 authRouter.post("/login", loginValidator, loginUser);
 
