@@ -146,6 +146,8 @@ export async function loginUser(req, res) {
   });
 }
 
-export async function get-Me(req,res) {
+export async function getMe(req,res) {
+
+  
 
 }
