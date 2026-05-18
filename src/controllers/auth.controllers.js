@@ -106,7 +106,7 @@ export async function loginUser(req, res) {
     });
   }
 
-  const isPasswordMatch = await user.comparePassord(password);
+  const isPasswordMatch = await user.comparePasssord(password);
 
   if (!isPasswordMatch) {
     return res.status(400).json({
@@ -144,4 +144,8 @@ export async function loginUser(req, res) {
       email: user.email,
     },
   });
+}
+
+export async function get-Me(req,res) {
+
 }
