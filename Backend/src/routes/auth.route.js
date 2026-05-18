@@ -14,6 +14,6 @@ authRouter.get("/verifyEmail", verifyEmail);
 
 authRouter.post("/login", loginValidator, loginUser);
 
-authRouter.get("/get-me", identifyUser,getMe)
+authRouter.get("/get-me", identifyUser, getMe)
 
 export default authRouter;
