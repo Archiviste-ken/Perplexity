@@ -57,29 +57,38 @@ export async function registerUser(req, res) {
 export async function verifyEmail(req, res) {
   const { token } = req.query;
 
-  const decoded = jwt.verify(token, process.env.JWT_SECRET);
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-  const user = await userModel.findOne({
-    email: decoded.email,
-  });
-
-  if (!user) {
-    return res.status(400).json({
-      message: "Invalid Token",
-      success: false,
-      err: "User not found",
+    const user = await userModel.findOne({
+      email: decoded.email,
     });
-  }
 
-  user.verified = true;
+    if (!user) {
+      return res.status(400).json({
+        message: "Invalid Token",
+        success: false,
+        err: "User not found",
+      });
+    }
 
-  await user.save();
+    user.verified = true;
 
-  const html = `
+    await user.save();
+
+    const html = `
     <h1>Email Verified Successfully!</h1>
     <p>Your email has been verified. You can log in to your account.</p>
     <a href="http://local/host:3000/login">Go to Login</a>
   `;
 
-  res.send(html);
+    res.send(html);
+  } catch (err) {
+    return res.status(400).json({
+      message: "Invalid or expired token",
+      err: err.message,
+    });
+  }
 }
+
+export async function loginUser(req, res) {}
