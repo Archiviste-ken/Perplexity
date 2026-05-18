@@ -146,8 +146,22 @@ export async function loginUser(req, res) {
   });
 }
 
-export async function getMe(req,res) {
+export async function getMe(req, res) {
+  const userId = req.user.id;
 
-  
+  const user = await userModel.findById(userId).select("-password");
 
+  if (!user) {
+    return res.status(400).json({
+      message: "User not found",
+      success: false,
+      err: "User not found",
+    });
+  }
+
+  res.status(200).json({
+    message: "User details fetched Successfully",
+    success: true,
+    user,
+  });
 }
