@@ -1,16 +1,16 @@
 import Router from "express";
-import { verifyEmail,registerUser } from "../controllers/auth.controllers.js";
-import { loginValidator, registerValidator } from "../validators/auth.validator.js";
+import { verifyEmail, registerUser } from "../controllers/auth.controllers.js";
+import {
+  loginValidator,
+  registerValidator,
+} from "../validators/auth.validator.js";
 
 const authRouter = Router();
 
 authRouter.post("/register", registerValidator, registerUser);
 
-authRouter.post("/verifyEmail",verifyEmail)
+authRouter.post("/verifyEmail", verifyEmail);
 
+authRouter.post("/login", loginValidator, loginUser);
 
-authRouter.post("/login",loginValidator, loginUser)
-
-
-
-export default authRouter
+export default authRouter;

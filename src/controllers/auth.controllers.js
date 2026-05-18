@@ -91,4 +91,50 @@ export async function verifyEmail(req, res) {
   }
 }
 
-export async function loginUser(req, res) {}
+export async function loginUser(req, res) {
+  const { email, password } = req.body;
+
+  const user = await userModel.findOne({
+    email,
+  });
+
+  if (!user) {
+    return res.status(400).json({
+      message: "Invalid email or password",
+      sucess: false,
+      err: "User not found",
+    });
+  }
+
+  const isPasswordMatch = await user.comparePassord(password);
+
+  if (!isPasswordMatch) {
+    return res.status(400).json({
+      message: "Invalid email or password",
+      success: false,
+      err: "Incorrect password",
+    });
+  }
+
+  if (!user.verified) {
+    return res.status(400).json({
+      message: "Please verify your email before logging in",
+      success: false,
+      err: "Email not verified",
+    });
+  }
+
+  const token = jwt.sign(
+    {
+      id: user._id,
+      username: user.username,
+    },
+    process.env.JWT_SECRET,
+    { expireIn: "7d" },
+  );
+  
+
+
+
+
+}
